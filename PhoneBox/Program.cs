@@ -11,7 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("PhoneBoxContextConnection") ?? throw new InvalidOperationException("Connection string 'PhoneBoxContextConnection' not found.");
 
 //Identity and Database
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<AppUser, AppRole>(x =>
+    {
+        x.Password.RequireUppercase = false;
+        x.Password.RequireNonAlphanumeric = false;
+    })
     .AddEntityFrameworkStores<AppDbContext>();
 
 //Add Serilog

@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="ExceptionHandling\" />
-    <Folder Include="Views\PhoneNumbers\" />
   </ItemGroup>
 
 </Project>
