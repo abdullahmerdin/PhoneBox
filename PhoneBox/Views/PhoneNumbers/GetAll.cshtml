@@ -7,45 +7,46 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                        <h3 class="card-title ">Numaralar</h3>
+                        <a asp-action="Add" asp-controller="PhoneNumbers" class="btn btn-block btn-primary col-2 float-right">Numara Ekle</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Kullanıcı</th>
-                                    <th>Numara</th>
-                                    <th>Oluşturulma Tarihi</th>
-                                    <th>Güncelle</th>
-                                    <th>Sil</th>
-                                </tr>
+                            <tr>
+                                <th>Id</th>
+                                <th>Kullanıcı</th>
+                                <th>Numara</th>
+                                <th>Oluşturulma Tarihi</th>
+                                <th>Güncelle</th>
+                                <th>Sil</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach (var number in Model)
-                                {
-                                    <tr>
-                                        <td>@number.Id</td>
-                                        <td>@number.AppUser.FirstName @number.AppUser.LastName</td>
-                                        <td>@number.Number</td>
-                                        <td>@number.CreatedTime</td>
-                                        <td>
-                                            @Html.ActionLink("Güncelle", "Update", new { id = number.Id }, new { @class = "btn btn-info"}) 
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Sil", "Delete", new { id = number.Id }, new { @class = "btn btn-danger"})
-                                        </td>
-                                    </tr>
-                                }
+                            @foreach (var number in Model)
+                            {
+                                <tr>
+                                    <td>@number.Id</td>
+                                    <td>@number.AppUser.FirstName @number.AppUser.LastName</td>
+                                    <td>@number.Number</td>
+                                    <td>@number.CreatedTime</td>
+                                    <td>
+                                        @Html.ActionLink("Güncelle", "Update", new { id = number.Id }, new { @class = "btn btn-info" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Sil", "Delete", new { id = number.Id }, new { @class = "btn btn-danger" })
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Kullanıcı</th>
-                                    <th>Numara</th>
-                                    <th>Oluşturulma Tarihi</th>
-                                </tr>
+                            <tr>
+                                <th>Id</th>
+                                <th>Kullanıcı</th>
+                                <th>Numara</th>
+                                <th>Oluşturulma Tarihi</th>
+                            </tr>
                             </tfoot>
                         </table>
                     </div>
