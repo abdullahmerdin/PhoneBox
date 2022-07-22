@@ -13,12 +13,7 @@ namespace PhoneBox.Controllers
         {
             _phoneNumberRepository = phoneNumberRepository;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -41,6 +36,7 @@ namespace PhoneBox.Controllers
                 if (result)
                     return RedirectToAction("GetAll");
                 else
+
                     throw new Exception("Ekleme işlemi esnasında bir hata meydana geldi");
             }
             return View(model);
