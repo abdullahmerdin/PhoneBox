@@ -9,9 +9,9 @@ namespace PhoneBox
     {
         public static void AddPhoneBoxServices(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<DbContext, AppDbContext>();
-
+          
             serviceCollection.AddScoped<IPhoneNumberRepository, PhoneNumberRepository>();
+           
         }
     }
 }

@@ -13,11 +13,12 @@ namespace PhoneBox.Controllers
         {
             _phoneNumberRepository = phoneNumberRepository;
         }
+
         
         [HttpGet]
         public IActionResult GetAll()
         {
-            IQueryable<PhoneNumber> result = _phoneNumberRepository.GetAll();
+            var result = _phoneNumberRepository.GetAll();
             return View(result);
         }
 

@@ -8,9 +8,10 @@ using PhoneBox.ExceptionHandling;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("PhoneBoxContextConnection") ?? throw new InvalidOperationException("Connection string 'PhoneBoxContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("MSSql") ?? throw new InvalidOperationException("Connection string 'PhoneBoxContextConnection' not found.");
 
 //Identity and Database
+builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddIdentity<AppUser, AppRole>(x =>
     {
         x.Password.RequireUppercase = false;
@@ -50,6 +51,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Phonenumbers}/{action=GetAll}/{id?}");
 
 app.Run();
