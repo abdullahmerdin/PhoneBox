@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PhoneBox.Entities;
 using PhoneBox.Models;
 using PhoneBox.Repositories.Abstracts;
@@ -14,11 +15,11 @@ namespace PhoneBox.Controllers
             _phoneNumberRepository = phoneNumberRepository;
         }
 
-        
+
         [HttpGet]
         public IActionResult GetAll()
         {
-            var result = _phoneNumberRepository.GetAll();
+            var result = _phoneNumberRepository.GetAll().Include(x => x.AppUser);
             return View(result);
         }
 
@@ -33,20 +34,18 @@ namespace PhoneBox.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _phoneNumberRepository.AddAsync(new() { AppUserId = model.UserId, Number = model.Number, CreatedTime = DateTime.Now });
-                if (result)
-                    return RedirectToAction("GetAll");
-                else
+                await _phoneNumberRepository.AddAsync(new() { AppUserId = model.UserId, Number = model.Number,  CreatedTime = DateTime.Now});
+                return RedirectToAction("GetAll");
 
-                    throw new Exception("Ekleme işlemi esnasında bir hata meydana geldi");
             }
-            return View(model);
+            throw new Exception("Ekleme işlemi esnasında bir hata meydana geldi");
         }
 
         [HttpGet]
         public IActionResult Update(int id)
         {
-            PhoneNumber phoneNumber = _phoneNumberRepository.Get(x => x.Id == id);
+            PhoneNumber phoneNumber = _phoneNumberRepository.GetByIdWithDetails(id);
+            ViewBag.appUser = phoneNumber.AppUser;
             if (phoneNumber != null)
                 return View(phoneNumber);
             else
@@ -59,23 +58,17 @@ namespace PhoneBox.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = _phoneNumberRepository.Update(model);
-                if (result)
-                    return RedirectToAction("GetAll");
-                else
-                    throw new Exception("Güncelleme işlemi esnasında bir hata meydana geldi");
+                _phoneNumberRepository.Update(model);
+                return RedirectToAction("GetAll");
             }
-            return View(model);
+            throw new Exception("Güncelleme işlemi esnasında bir hata meydana geldi");
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            bool result = await _phoneNumberRepository.DeleteAsync(id);
-            if (result)
-                return RedirectToAction("GetAll");
-            else
-                throw new Exception("Belirtilen id ile eşleşen bir telefon kaydı bulunamadı.");
+            await _phoneNumberRepository.DeleteAsync(id);
+            return RedirectToAction("GetAll");
         }
     }
 }

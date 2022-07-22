@@ -7,7 +7,7 @@ namespace PhoneBox.Entities
     {
         public string Number { get; set; }
         public int AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public virtual AppUser? AppUser { get; set; }
 
     }
 }

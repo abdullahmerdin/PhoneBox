@@ -247,7 +247,7 @@ namespace PhoneBox.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("PhoneNumber");
+                    b.ToTable("PhoneNumber", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

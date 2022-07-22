@@ -18,6 +18,8 @@
                                     <th>Kullanıcı</th>
                                     <th>Numara</th>
                                     <th>Oluşturulma Tarihi</th>
+                                    <th>Güncelle</th>
+                                    <th>Sil</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,14 +27,14 @@
                                 {
                                     <tr>
                                         <td>@number.Id</td>
-                                        <td>@number.AppUser</td>
+                                        <td>@number.AppUser.FirstName @number.AppUser.LastName</td>
                                         <td>@number.Number</td>
                                         <td>@number.CreatedTime</td>
                                         <td>
-                                            <a class="btn btn-info"@Html.ActionLink("Update", "Update", new { id = number.Id })>Güncelle</a>
+                                            @Html.ActionLink("Güncelle", "Update", new { id = number.Id }, new { @class = "btn btn-info"}) 
                                         </td>
                                         <td>
-                                            <a class="btn btn-danger" @Html.ActionLink("Delete", "Delete", new { id = number.Id })>SİL</a>
+                                            @Html.ActionLink("Sil", "Delete", new { id = number.Id }, new { @class = "btn btn-danger"})
                                         </td>
                                     </tr>
                                 }

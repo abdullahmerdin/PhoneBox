@@ -11,23 +11,28 @@ namespace PhoneBox.Repositories
     {
         readonly TContext _context;
 
-        public async Task<bool> AddAsync(TEntity entity)
+        public GenericRepository(TContext context)
+        {
+            _context = context;
+        }
+
+        public async Task AddAsync(TEntity entity)
         {
             EntityEntry<TEntity> entityEntry = await _context.Set<TEntity>().AddAsync(entity);
-            return entityEntry.State == EntityState.Added;
+            _context.SaveChanges();
         }
 
-        public bool Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
             EntityEntry<TEntity> entityEntry = _context.Set<TEntity>().Remove(entity);
-            return entityEntry.State == EntityState.Deleted;
+            _context.SaveChanges();
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             TEntity? model = await _context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == id);
             EntityEntry<TEntity> entityEntry = _context.Set<TEntity>().Remove(model);
-            return entityEntry.State == EntityState.Deleted;
+            _context.SaveChanges();
         }
 
         public TEntity? Get(Expression<Func<TEntity, bool>> filter)
@@ -42,10 +47,10 @@ namespace PhoneBox.Repositories
                 : _context.Set<TEntity>().Where(filter);
         }
 
-        public bool Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             EntityEntry<TEntity> entityEntry = _context.Set<TEntity>().Update(entity);
-            return entityEntry.State == EntityState.Deleted;
+            _context.SaveChanges();
         }
     }
 }

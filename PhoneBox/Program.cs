@@ -41,10 +41,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.UseExceptionHandlerMiddleware();
+
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+
+app.UseSerilogRequestLogging();
 
 app.UseRouting();
+
+app.UseStaticFiles();
+
 app.UseAuthentication();;
 
 app.UseAuthorization();
