@@ -34,10 +34,10 @@
                                     <td>@number.Number</td>
                                     <td>@number.CreatedTime</td>
                                     <td>
-                                        @Html.ActionLink(localizer["Güncelle"].Value, "Update", new { id = number.Id }, new { @class = "btn btn-info" })
+                                        <a asp-action="Update" asp-route-id="@number.Id" class="btn btn-info">@localizer["Güncelle"]</a>
                                     </td>
                                     <td>
-                                        @Html.ActionLink(localizer["Sil"].Value, "Delete", new { id = number.Id }, new { @class = "btn btn-danger" })
+                                        <a asp-action="Delete" asp-route-id="@number.Id" class="btn btn-danger">@localizer["Sil"]</a>
                                     </td>
                                 </tr>
                             }
