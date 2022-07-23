@@ -6,9 +6,13 @@
         </div>
 
         <div class="card-body" style="display: block;">
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="UserId">Kullanıcı</label>
                 <input type="text" asp-for="UserId" class="form-control">
+            </div>*@
+            <div class="form-group">
+                @Html.Label("Kullanıcı")
+                @Html.DropDownListFor(x => x.UserId, (List<SelectListItem>)ViewBag.userList, new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <label asp-for="Number">Numara</label>

@@ -12,6 +12,7 @@ var connectionString = builder.Configuration.GetConnectionString("MSSql") ?? thr
 
 //Identity and Database
 builder.Services.AddDbContext<AppDbContext>();
+
 builder.Services.AddIdentity<AppUser, AppRole>(x =>
     {
         x.Password.RequireUppercase = false;

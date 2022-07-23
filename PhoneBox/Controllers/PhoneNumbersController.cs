@@ -1,18 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PhoneBox.Entities;
+using PhoneBox.Entities.Identity;
 using PhoneBox.Models;
 using PhoneBox.Repositories.Abstracts;
+using System.Collections.Generic;
 
 namespace PhoneBox.Controllers
 {
     public class PhoneNumbersController : Controller
     {
         readonly IPhoneNumberRepository _phoneNumberRepository;
+        readonly UserManager<AppUser> _userManager;
 
-        public PhoneNumbersController(IPhoneNumberRepository phoneNumberRepository)
+        public PhoneNumbersController(IPhoneNumberRepository phoneNumberRepository, UserManager<AppUser> userManager)
         {
             _phoneNumberRepository = phoneNumberRepository;
+            _userManager = userManager;
         }
 
 
@@ -26,6 +32,13 @@ namespace PhoneBox.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            List<SelectListItem> userList = (from x in _userManager.Users.ToList()
+                                             select new SelectListItem
+                                             {
+                                                 Text = x.FirstName + " " + x.LastName,
+                                                 Value = x.Id.ToString()
+                                             }).ToList();
+            ViewBag.userList = userList;
             return View();
         }
 
@@ -34,7 +47,7 @@ namespace PhoneBox.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _phoneNumberRepository.AddAsync(new() { AppUserId = model.UserId, Number = model.Number,  CreatedTime = DateTime.Now});
+                await _phoneNumberRepository.AddAsync(new() { AppUserId = model.UserId, Number = model.Number, CreatedTime = DateTime.Now });
                 return RedirectToAction("GetAll");
 
             }
