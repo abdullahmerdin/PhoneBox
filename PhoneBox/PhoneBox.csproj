@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="ExceptionHandling\" />
+    <Folder Include="Resources\Views\Shared\" />
   </ItemGroup>
 
 </Project>

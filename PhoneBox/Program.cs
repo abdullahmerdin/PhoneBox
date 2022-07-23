@@ -1,7 +1,11 @@
 
+using System.Globalization;
 using PhoneBox;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PhoneBox.Context;
 using PhoneBox.Entities.Identity;
 using PhoneBox.ExceptionHandling;
@@ -26,10 +30,27 @@ builder.Host.UseSerilog(((ctx, lc) => lc
     .WriteTo.Console()));
 
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
 builder.Services.AddPhoneBoxServices();
+
+//Add Localization
+builder.Services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
+builder.Services.AddMvc()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
+builder.Services.Configure<RequestLocalizationOptions>(opt =>
+    {
+        var supportedCultures = new[]
+        {
+            new CultureInfo("tr"),
+            new CultureInfo("en")
+        };
+        opt.DefaultRequestCulture = new RequestCulture("tr");
+        opt.SupportedCultures = supportedCultures;
+        opt.SupportedUICultures = supportedCultures;
+    });
+
+
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -54,8 +75,10 @@ app.UseAuthentication();;
 
 app.UseAuthorization();
 
+app.UseRequestLocalization(((IApplicationBuilder)app).ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Phonenumbers}/{action=GetAll}/{id?}");
+    pattern: "{controller=PhoneNumbers}/{action=GetAll}/{id?}");
 
 app.Run();

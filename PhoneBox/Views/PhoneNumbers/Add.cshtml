@@ -1,24 +1,26 @@
-﻿@model AddPhoneNumberVM
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model AddPhoneNumberVM
+@inject IViewLocalizer localizer
 <form method="post" asp-action="Add" asp-controller="PhoneNumbers">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Numara Ekle</h3>
+            <h3 class="card-title">@localizer["Numara Ekle"]</h3>
         </div>
 
         <div class="card-body" style="display: block;">
             <div class="form-group">
-                <label asp-for="UserId">Kullanıcı</label>
+                <label asp-for="UserId">@localizer["Kullanıcı"]</label>
                 <input type="text" asp-for="UserId" class="form-control">
             </div>
             <div class="form-group">
-                <label asp-for="Number">Numara</label>
+                <label asp-for="Number">@localizer["Numara"]</label>
                 <input type="text" asp-for="Number" class="form-control">
             </div>
         </div>
         <div class="card-footer">
 
-            <a asp-action="GetAll" asp-controller="PhoneNumbers" class="btn btn-secondary col-2">Geri Dön</a>
-            <input type="submit" value="Numara Ekle" class="btn btn-success col-2 float-right">
+            <a asp-action="GetAll" asp-controller="PhoneNumbers" class="btn btn-secondary col-2">@localizer["Geri Dön"]</a>
+            <input type="submit" value="@localizer["Numara Ekle"]" class="btn btn-success col-2 float-right">
         </div>
     </div>
 </form>
