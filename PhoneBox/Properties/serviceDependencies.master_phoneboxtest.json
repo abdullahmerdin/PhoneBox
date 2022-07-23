@@ -1,10 +1,15 @@
 {
   "dependencies": {
+    "mssql1": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:PhoneBoxContextConnection"
+    },
     "mssql2": {
       "secretStore": "AzureAppSettings",
-      "type": "mssql.onprem",
-      "connectionId": "ConnectionStrings:Azure",
-      "dynamicId": null
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/phoneboxtest/databases/phoneboxdb",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:Azure"
     }
   }
 }
