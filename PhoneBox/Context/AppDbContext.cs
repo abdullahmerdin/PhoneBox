@@ -15,7 +15,7 @@ namespace PhoneBox.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("Azure"));
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("HostLab"));
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
