@@ -23,7 +23,6 @@ public class ExceptionHandlerMiddleware
             _logger.Fatal("@{MethodName} - {Message}", nameof(ex), "Fatal");
             _logger.Warning("@{MethodName} - {Message}", nameof(ex), "Warning");
             _logger.Debug("@{MethodName} - {Message}", nameof(ex), "Debug");
-            throw;
         }
     }
 

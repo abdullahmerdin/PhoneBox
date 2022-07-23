@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using PhoneBox.Entities.Base;
 
 namespace PhoneBox.Entities.Identity
 {
