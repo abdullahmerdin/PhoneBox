@@ -17,7 +17,7 @@
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>@localizer["Numara"] Id</th>
                                 <th>@localizer["Kullanıcı"]</th>
                                 <th>@localizer["Numara"]</th>
                                 <th>@localizer["Oluşturulma Tarihi"]</th>
@@ -37,17 +37,19 @@
                                         <a asp-action="Update" asp-route-id="@number.Id" class="btn btn-info">@localizer["Güncelle"]</a>
                                     </td>
                                     <td>
-                                        <a asp-action="Delete" asp-route-id="@number.Id" class="btn btn-danger">@localizer["Sil"]</a>
+                                        <a asp-action="Delete" asp-route-id="@number.Id" class="btn btn-danger col-10">@localizer["Sil"]</a>
                                     </td>
                                 </tr>
                             }
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>Id</th>
+                                <th>@localizer["Numara"] Id</th>
                                 <th>@localizer["Kullanıcı"]</th>
                                 <th>@localizer["Numara"]</th>
                                 <th>@localizer["Oluşturulma Tarihi"]</th>
+                                 <th>@localizer["Güncelle"]</th>
+                                <th>@localizer["Sil"]</th>
                             </tr>
                             </tfoot>
                         </table>
