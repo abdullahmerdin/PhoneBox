@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PhoneBox.Entities.Identity;
 using PhoneBox.Models;
-using PhoneBox.Repositories.Abstracts;
 
 namespace PhoneBox.Controllers
 {

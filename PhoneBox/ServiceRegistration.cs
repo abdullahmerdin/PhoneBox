@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PhoneBox.Context;
-using PhoneBox.Repositories.Abstracts;
+﻿using PhoneBox.Repositories.Abstracts;
 using PhoneBox.Repositories.Concretes;
 
 namespace PhoneBox
