@@ -3,6 +3,11 @@
     "mssql1": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:PhoneBoxContextConnection"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Azure",
+      "dynamicId": null
     }
   }
 }

@@ -10,7 +10,6 @@ using PhoneBox.ExceptionHandling;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("Azure") ?? throw new InvalidOperationException("Connection string 'PhoneBoxContextConnection' not found.");
 
 //Identity and Database
 builder.Services.AddDbContext<AppDbContext>();
