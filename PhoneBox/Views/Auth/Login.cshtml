@@ -1,69 +1,68 @@
-﻿@{
-    Layout = null;
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model UserForLoginVM;
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = "Login";
+    Layout = "AuthLayout";
 }
-
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Login</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="/LoginForm/css/style.css">
-
-</head>
-<body class="img js-fullheight" style="background-image: url(/LoginForm/images/bg.jpg);">
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Kullanıcı Girişi</h2>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-4">
-                    <div class="login-wrap p-0">
-                        <h3 class="mb-4 text-center">Bir hesabın var mı ?</h3>
-                        <form method="post" asp-action="Login" asp-controller="Auth">
-                            <div class="form-group">
-                                <input type="text" name="Mail" class="form-control" placeholder="Kullanıcı Adı" required>
-                            </div>
-                            <div class="form-group">
-                                <input id="password-field" type="password" name="Password" class="form-control" placeholder="Şifre" required>
-                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="form-control btn btn-primary submit px-3">Giris Yap</button>
-                            </div>
-                            <div class="form-group d-md-flex">
-                                <div class="w-50">
-                                    <label class="checkbox-wrap checkbox-primary">
-                                        Beni Hatırla
-                                        <input type="checkbox" checked>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="w-50 text-md-right">
-                                    <a href="#" style="color: #fff">Şifremi Unuttum</a>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <!-- /.login-logo -->
+      <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a asp-action="Login" asp-controller="Auth" class="h1"><b>@localizer["Giriş Yap"]</b></a>
         </div>
-    </section>
+    <div class="card-body">
+      <p class="login-box-msg">@localizer["İşlem yapmak için oturum açınız"]</p>
 
-    <script src="/LoginForm/js/jquery.min.js"></script>
-    <script src="/LoginForm/js/popper.js"></script>
-    <script src="/LoginForm/js/bootstrap.min.js"></script>
-    <script src="/LoginForm/js/main.js"></script>
+      <form asp-action="Login" asp-controller="Auth" method="post">
+          <div class="input-group mb-3">
+           
+              <input type="text" asp-for="Username" class="form-control" placeholder="@localizer["Kullanıcı Adı"]">
+              <div class="input-group-append">
+                  <div class="input-group-text">
+                      <span class="fas fa-user"></span>
+                  </div>
+              </div>
+          </div>
+        <div class="input-group mb-3">
+          <input type="password" asp-for="Password" class="form-control" placeholder="@localizer["Şifre"]">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                @localizer["Beni hatırla"]
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+              <input type="submit" value="@localizer["Giriş Yap"]"  class="btn btn-primary btn-block">
+             
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+
+      <p class="mb-1">
+        <a href="forgot-password.html">@localizer["Şifremi unuttum"]</a>
+      </p>
+      <p class="mb-0">
+        <a href="register.html" class="text-center">@localizer["Kayıt Ol"]</a>
+      </p>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.login-box -->
 
 </body>
-</html>
-
