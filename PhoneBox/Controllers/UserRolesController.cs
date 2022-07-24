@@ -19,8 +19,8 @@ namespace PhoneBox.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var users = _userManager.Users.ToList();
-            return View(users);
+            var roles = _roleManager.Roles.ToList();
+            return View(roles);
         }
 
         [HttpGet]
