@@ -22,7 +22,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> YetkileriDuzenledim()
+        public async Task<IActionResult> GiveDefaultPermissions()
         {
             int rootId = 2;
             AppRole root = _roleManager.Roles.Single(x => x.Id == rootId);
