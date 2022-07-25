@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBox.Entities.Identity;
 using PhoneBox.Models;
 
 namespace PhoneBox.Controllers
 {
+    [AllowAnonymous]
     public class AuthController : Controller
     {
         readonly SignInManager<AppUser> _signInManager;
@@ -35,32 +37,38 @@ namespace PhoneBox.Controllers
                 return View();
         }
 
-        //REGISTER PAGE ON GET
+        ////REGISTER PAGE ON GET
+        //[HttpGet]
+        //public IActionResult Register()
+        //{
+        //    return View();
+        //}
+
+        ////REGISTER PAGE ON POST
+        //[HttpPost]
+        //public async Task<IActionResult> Register(UserForRegisterVM viewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        AppUser appUser = new()
+        //        {
+        //            Email = viewModel.Email,
+        //            UserName = viewModel.Username,
+        //            FirstName = viewModel.FirstName,
+        //            LastName = viewModel.LastName
+        //        };
+        //        IdentityResult result = await _userManager.CreateAsync(appUser, viewModel.Password);
+
+        //        if (result.Succeeded)
+        //            return RedirectToAction("Index", "Home");
+        //    }
+        //    return View(viewModel);
+        //}
+
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult AccessDenied()
         {
             return View();
-        }
-
-        //REGISTER PAGE ON POST
-        [HttpPost]
-        public async Task<IActionResult> Register(UserForRegisterVM viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                AppUser appUser = new()
-                {
-                    Email = viewModel.Email,
-                    UserName = viewModel.Username,
-                    FirstName = viewModel.FirstName,
-                    LastName = viewModel.LastName
-                };
-                IdentityResult result = await _userManager.CreateAsync(appUser, viewModel.Password);
-
-                if (result.Succeeded)
-                    return RedirectToAction("Index", "Home");
-            }
-            return View(viewModel);
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBox.Entities.Identity;
-using PhoneBox.Models;
 
 namespace PhoneBox.Controllers
 {
@@ -23,11 +23,13 @@ namespace PhoneBox.Controllers
             var users = _userManager.Users.ToList();
             return View(users);
         }
-
+        
+        [Authorize(Roles =("admin"))]
+        [Authorize(Policy ="adminpolicy")]
         public async Task<IActionResult> Delete(int userId)
         {
             AppUser user = await _userManager.FindByIdAsync(userId.ToString());
-            _userManager.DeleteAsync(user);
+            await _userManager.DeleteAsync(user);
             return RedirectToAction("GetAll");
         }
 

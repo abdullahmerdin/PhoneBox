@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
-@model AddPhoneNumberVM
+@*@model AddCustomerVM*@
 @inject IViewLocalizer localizer
 <form method="post" asp-action="Add" asp-controller="PhoneNumbers">
     <div class="card card-primary">
@@ -9,12 +9,12 @@
 
         <div class="card-body" style="display: block;">
             <div class="form-group">
-                <label asp-for="UserId">@localizer["Kullanıcı"]</label>
-                @Html.DropDownListFor(x => x.UserId, (List<SelectListItem>)ViewBag.userList, new { @class = "form-control" })
+                @*<label asp-for="UserId">@localizer["Kullanıcı"]</label>*@
+                @*@Html.DropDownListFor(x => x.UserId, (List<SelectListItem>)ViewBag.userList, new { @class = "form-control" })*@
             </div>
             <div class="form-group">
-                <label asp-for="Number">@localizer["Numara"]</label>
-                <input type="text" asp-for="Number" class="form-control">
+                @*<label asp-for="Number">@localizer["Numara"]</label>*@
+                @*<input type="text" asp-for="Number" class="form-control">*@
             </div>
         </div>
         <div class="card-footer">

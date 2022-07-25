@@ -7,9 +7,16 @@ namespace PhoneBox
     {
         public static void AddPhoneBoxServices(this IServiceCollection serviceCollection)
         {
-          
-            serviceCollection.AddScoped<IPhoneNumberRepository, PhoneNumberRepository>();
-           
+            serviceCollection.AddScoped<ICustomerRepository, CustomerRepository>();
+        }
+
+        public static void AddClaimAuthorizationPolicies(this IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddAuthorization(options =>
+            {
+                options.AddPolicy("GetAllPhoneNumber", policy => policy.RequireClaim("getAllPhoneNumber"));
+                }
+            );
         }
     }
 }
