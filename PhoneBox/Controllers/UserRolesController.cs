@@ -26,7 +26,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "AddUserRole")]
+        //[Authorize(Policy = "AddUserRole")]
         //[AllowAnonymous]
         public IActionResult AddRole()
         {
@@ -34,7 +34,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "AddUserRole")]
+        //[Authorize(Policy = "AddUserRole")]
         //[AllowAnonymous]
 
         public async Task<IActionResult> AddRole(AddRoleVM model)
