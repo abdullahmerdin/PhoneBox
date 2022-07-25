@@ -24,7 +24,7 @@ namespace PhoneBox.Controllers
         [HttpGet]
         public async Task<IActionResult> GiveDefaultPermissions()
         {
-            int rootId = 2;
+            int rootId = 6;
             AppRole root = _roleManager.Roles.Single(x => x.Id == rootId);
             await _roleManager.AddClaimAsync(root, new Claim(CustomClaimTypes.Permission, "GetAllCustomers"));
             await _roleManager.AddClaimAsync(root, new Claim(CustomClaimTypes.Permission, "AddCustomer"));
@@ -40,7 +40,7 @@ namespace PhoneBox.Controllers
             await _roleManager.AddClaimAsync(root, new Claim(CustomClaimTypes.Permission, "AssignUserRole"));
 
 
-            int adminId = 3;
+            int adminId = 7;
             AppRole admin = _roleManager.Roles.Single(x => x.Id == adminId);
             await _roleManager.AddClaimAsync(admin, new Claim(CustomClaimTypes.Permission, "AddUser"));
             await _roleManager.AddClaimAsync(admin, new Claim(CustomClaimTypes.Permission, "UpdateUser"));
@@ -55,7 +55,7 @@ namespace PhoneBox.Controllers
             await _roleManager.AddClaimAsync(admin, new Claim(CustomClaimTypes.Permission, "DeleteCustomer"));
             await _roleManager.AddClaimAsync(admin, new Claim(CustomClaimTypes.Permission, "UpdateCustomer"));
 
-            int employeeId = 4;
+            int employeeId = 8;
             AppRole employee = _roleManager.Roles.Single(x => x.Id == employeeId);
             await _roleManager.AddClaimAsync(employee, new Claim(CustomClaimTypes.Permission, "GetAllCustomers"));
             await _roleManager.AddClaimAsync(employee, new Claim(CustomClaimTypes.Permission, "AddCustomer"));
