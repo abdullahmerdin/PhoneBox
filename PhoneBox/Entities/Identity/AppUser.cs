@@ -7,6 +7,5 @@ namespace PhoneBox.Entities.Identity
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public ICollection<PhoneNumber> PhoneNumbers { get; set; }
     }
 }

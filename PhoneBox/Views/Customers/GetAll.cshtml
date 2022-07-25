@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@*@model IQueryable<PhoneBox.Entities.PhoneNumber>*@
+@inject IViewLocalizer localizer
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title mt-2">@localizer["Numaralar"] </h3>
+                        <a asp-action="Add" asp-controller="PhoneNumbers" class="btn btn-block btn-primary col-2 float-right">@localizer["Numara Ekle"]</a>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>@localizer["Numara"] Id</th>
+                                <th>@localizer["Kullanıcı"]</th>
+                                <th>@localizer["Numara"]</th>
+                                <th>@localizer["Oluşturulma Tarihi"]</th>
+                                <th>@localizer["Güncelle"]</th>
+                                <th>@localizer["Sil"]</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var number in Model)
+                            {
+                                <tr>
+                                    <td>@number.Id</td>
+                                    <td>@number.AppUser.FirstName @number.AppUser.LastName</td>
+                                    <td>@number.Number</td>
+                                    <td>@number.CreatedTime</td>
+                                    <td>
+                                        <a asp-action="Update" asp-route-id="@number.Id" class="btn btn-info">@localizer["Güncelle"]</a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="Delete" asp-route-id="@number.Id" class="btn btn-danger col-10">@localizer["Sil"]</a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>@localizer["Numara"] Id</th>
+                                <th>@localizer["Kullanıcı"]</th>
+                                <th>@localizer["Numara"]</th>
+                                <th>@localizer["Oluşturulma Tarihi"]</th>
+                                 <th>@localizer["Güncelle"]</th>
+                                <th>@localizer["Sil"]</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>

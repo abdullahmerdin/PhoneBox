@@ -8,6 +8,7 @@ using PhoneBox.Context;
 using PhoneBox.Entities.Identity;
 using PhoneBox.ExceptionHandling;
 using Serilog;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +19,17 @@ builder.Services.AddIdentity<AppUser, AppRole>(x =>
     {
         x.Password.RequireUppercase = false;
         x.Password.RequireNonAlphanumeric = false;
+        x.Password.RequireDigit = false;
+        x.Password.RequireLowercase = false;
+        x.Password.RequiredLength = 4;
     })
     .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Auth/Login";
+    options.AccessDeniedPath = "/Auth/AccessDenied";
+});
 
 //Add Serilog
 Log.Logger = new LoggerConfiguration().CreateLogger();
@@ -29,12 +39,15 @@ builder.Host.UseSerilog(((ctx, lc) => lc
 
 
 builder.Services.AddPhoneBoxServices();
+builder.Services.AddClaimAuthorizationPolicies();
 
 //Add Localization
 builder.Services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
+
 builder.Services.AddMvc()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization();
+
 builder.Services.Configure<RequestLocalizationOptions>(opt =>
     {
         var supportedCultures = new[]
@@ -69,7 +82,7 @@ app.UseRouting();
 
 app.UseStaticFiles();
 
-app.UseAuthentication();;
+app.UseAuthentication();
 
 app.UseAuthorization();
 
@@ -77,6 +90,6 @@ app.UseRequestLocalization(((IApplicationBuilder)app).ApplicationServices.GetReq
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=PhoneNumbers}/{action=GetAll}/{id?}");
+    pattern: "{controller=Customers}/{action=GetAll}/{id?}");
 
 app.Run();
