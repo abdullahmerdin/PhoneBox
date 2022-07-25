@@ -30,7 +30,7 @@ namespace PhoneBox.Controllers
             AppUser appUser = await _userManager.FindByNameAsync(viewModel.Username);
             Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser, viewModel.Password, false, false);
             if (result.Succeeded)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetAll", "Customers");
             else
                 return View();
         }
@@ -58,7 +58,7 @@ namespace PhoneBox.Controllers
                 IdentityResult result = await _userManager.CreateAsync(appUser, viewModel.Password);
 
                 if (result.Succeeded)
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GetAll", "PhoneNumbers");
             }
             return View(viewModel);
         }
