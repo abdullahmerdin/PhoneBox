@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PhoneBox.Entities;
 using PhoneBox.Models;
 using PhoneBox.Repositories.Abstracts;
+using System.Security.Claims;
 
 namespace PhoneBox.Controllers
 {
@@ -16,7 +17,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "GetAllPhoneNumber")]
+        [Authorize(Policy = "GetAllCustomers")]
         public IActionResult GetAll()
         {
             var result = _customerRepository.GetAll();
@@ -24,22 +25,25 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AddCustomer")]
         public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Policy = "AddCustomer")]
         public async Task<IActionResult> Add(AddCustomerVM model)
         {
             if (ModelState.IsValid)
             {
-                await _customerRepository.AddAsync(new() { 
+                await _customerRepository.AddAsync(new()
+                {
                     Address = model.Address,
                     CompanyName = model.CompanyName,
                     CreatedTime = DateTime.Now,
                     Email = model.Email,
-                    FirstName = model.FirstName,    
+                    FirstName = model.FirstName,
                     JobTitle = model.JobTitle,
                     LastName = model.LastName,
                     PhoneNumber = model.PhoneNumber,
@@ -51,6 +55,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "UpdateCustomer")]
         public IActionResult Update(int id)
         {
             Customer? customer = _customerRepository.Get(x => x.Id == id);
@@ -61,6 +66,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "UpdateCustomer")]
         public IActionResult Update(Customer model)
         {
             if (ModelState.IsValid)
@@ -72,6 +78,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "DeleteCustomer")]
         public async Task<IActionResult> Delete(int id)
         {
             await _customerRepository.DeleteAsync(id);

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBox.Entities.Identity;
 using PhoneBox.Models;
 
 namespace PhoneBox.Controllers
 {
-
     public class UserRolesController : Controller
     {
         readonly UserManager<AppUser> _userManager;
@@ -18,6 +18,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "GetAllUserRoles")]
         public IActionResult GetAll()
         {
             var roles = _roleManager.Roles.ToList();
@@ -25,12 +26,17 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AddUserRole")]
+        //[AllowAnonymous]
         public IActionResult AddRole()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Policy = "AddUserRole")]
+        //[AllowAnonymous]
+
         public async Task<IActionResult> AddRole(AddRoleVM model)
         {
             if (ModelState.IsValid)
@@ -55,6 +61,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "UpdateUserRole")]
         public IActionResult UpdateRole(int id)
         {
             var values = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
@@ -69,6 +76,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "UpdateUserRole")]
         public async Task<IActionResult> UpdateRole(UpdateRoleVM model)
         {
             var values = _roleManager.Roles.Where(x => x.Id == model.Id).FirstOrDefault();
@@ -84,6 +92,7 @@ namespace PhoneBox.Controllers
             return View();
         }
 
+        [Authorize(Policy = "DeleteUserRole")]
         public async Task<IActionResult> DeleteRole(int id)
         {
             var values = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
@@ -96,6 +105,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AssignUserRole")]
         public async Task<IActionResult> AssignRole(int userId)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
@@ -119,6 +129,7 @@ namespace PhoneBox.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "AssignUserRole")]
         public async Task<IActionResult> AssignRole(List<AssignRoleVM> model)
         {
             var userId = (int)TempData["UserId"];

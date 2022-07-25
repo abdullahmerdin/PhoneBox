@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
-@model UserForRegisterVM;
+@*@model UserForRegisterVM;*@
 @inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Register";
@@ -16,7 +16,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">@localizer["İşlem yapmak için kayıt olunuz"]</p>
 
-      <form method="post" asp-action="Register" asp-controller="Auth">
+      @*<form method="post" asp-action="Register" asp-controller="Auth">
           <div class="input-group mb-3">
               <input type="text" asp-for="Username" class="form-control" placeholder="@localizer["Kullanıcı adı"]">
               <div class="input-group-append">
@@ -73,7 +73,7 @@
           </div>
           <!-- /.col -->
         </div>
-      </form>
+      </form>*@
 
         <a asp-action="Login" asp-controller="Auth" class="text-center">@localizer["Zaten bir hesabım var"]</a>
     </div>
