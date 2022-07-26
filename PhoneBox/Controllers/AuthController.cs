@@ -24,7 +24,7 @@ namespace PhoneBox.Controllers
         [HttpGet]
         public async Task<IActionResult> GiveDefaultPermissions()
         {
-            int rootId = 6;
+            int rootId = _roleManager.GetRoleIdAsync(new AppRole() { Name = "root" }).Id;
             AppRole root = _roleManager.Roles.Single(x => x.Id == rootId);
             await _roleManager.AddClaimAsync(root, new Claim(CustomClaimTypes.Permission, "GetAllCustomers"));
             await _roleManager.AddClaimAsync(root, new Claim(CustomClaimTypes.Permission, "AddCustomer"));
