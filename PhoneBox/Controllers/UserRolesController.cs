@@ -55,7 +55,7 @@ namespace PhoneBox.Controllers
                     {
                         await _roleManager.AddClaimAsync(role, new Claim(CustomClaimTypes.Permission, policy.Policy));
                     }
-                    return RedirectToAction("GetAll");
+                    return RedirectToAction("GetAllUserRoles");
                 }
                 foreach (var item in result.Errors)
                 {
@@ -92,7 +92,7 @@ namespace PhoneBox.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("GetAll");
+                return RedirectToAction("GetAllUserRoles");
             }
             return View();
         }
