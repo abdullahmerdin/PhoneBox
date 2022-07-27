@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PhoneBox.Controllers
 {
+    [Authorize(Roles = "root")]
     public class AdminsController : Controller
     {
-        //todo metotları oluştur
         public IActionResult GetAll()
         {
             return View();

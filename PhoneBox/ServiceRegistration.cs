@@ -1,4 +1,4 @@
-﻿using PhoneBox.Entities.Identity;
+﻿using PhoneBox.Constants.Identity.Constants;
 using PhoneBox.Repositories.Abstracts;
 using PhoneBox.Repositories.Concretes;
 

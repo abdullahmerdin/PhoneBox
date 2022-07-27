@@ -20,7 +20,7 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy ="GetAllUsers")]
-        public IActionResult GetAll()
+        public IActionResult GetAllUsers()
         {
             var users = _userManager.Users.ToList();
             return View(users);
@@ -28,7 +28,7 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy ="AddUser")]
-        public IActionResult Add()
+        public IActionResult AddUser()
         {
             ViewBag.Roles = _roleManager.Roles.Select(x => new RoleWithSelectVM
             {
@@ -45,7 +45,7 @@ namespace PhoneBox.Controllers
 
         [HttpPost]
         [Authorize(Policy ="AddUser")]
-        public async Task<IActionResult> Add(AddUserVM model)
+        public async Task<IActionResult> AddUser(AddUserVM model)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace PhoneBox.Controllers
         }
 
         [Authorize(Policy ="DeleteUser")]
-        public async Task<IActionResult> Delete(int userId)
+        public async Task<IActionResult> DeleteUser(int userId)
         {
             AppUser user = await _userManager.FindByIdAsync(userId.ToString());
             await _userManager.DeleteAsync(user);

@@ -1,14 +1,12 @@
-
-using System.Globalization;
-using PhoneBox;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
+using PhoneBox;
 using PhoneBox.Context;
 using PhoneBox.Entities.Identity;
 using PhoneBox.ExceptionHandling;
 using Serilog;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PhoneBox.Constants.Identity.Constants;
 using PhoneBox.Entities.Identity;
 using PhoneBox.Models;
+using System.Security.Claims;
 
 namespace PhoneBox.Controllers
 {
@@ -19,7 +21,7 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "GetAllUserRoles")]
-        public IActionResult GetAll()
+        public IActionResult GetAllUserRoles()
         {
             var roles = _roleManager.Roles.ToList();
             return View(roles);
@@ -27,17 +29,16 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "AddUserRole")]
-        //[AllowAnonymous]
-        public IActionResult AddRole()
+        public IActionResult AddUserRole()
         {
-            return View();
+            AddRoleVM model = new();
+            model.Policies = Constants.Policies.PolicyTypes.Policies.Select(x => new PolicyWithIsSelectVM { Policy = x, IsSelected = false }).ToList();
+            return View(model);
         }
 
         [HttpPost]
         [Authorize(Policy = "AddUserRole")]
-        //[AllowAnonymous]
-
-        public async Task<IActionResult> AddRole(AddRoleVM model)
+        public async Task<IActionResult> AddUserRole(AddRoleVM model)
         {
             if (ModelState.IsValid)
             {
@@ -50,6 +51,10 @@ namespace PhoneBox.Controllers
 
                 if (result.Succeeded)
                 {
+                    foreach (var policy in model.Policies.Where(x => x.IsSelected))
+                    {
+                        await _roleManager.AddClaimAsync(role, new Claim(CustomClaimTypes.Permission, policy.Policy));
+                    }
                     return RedirectToAction("GetAll");
                 }
                 foreach (var item in result.Errors)
@@ -62,7 +67,7 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "UpdateUserRole")]
-        public IActionResult UpdateRole(int id)
+        public IActionResult UpdateUserRole(int id)
         {
             var values = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
 
@@ -77,7 +82,7 @@ namespace PhoneBox.Controllers
 
         [HttpPost]
         [Authorize(Policy = "UpdateUserRole")]
-        public async Task<IActionResult> UpdateRole(UpdateRoleVM model)
+        public async Task<IActionResult> UpdateUserRole(UpdateRoleVM model)
         {
             var values = _roleManager.Roles.Where(x => x.Id == model.Id).FirstOrDefault();
 
@@ -93,7 +98,7 @@ namespace PhoneBox.Controllers
         }
 
         [Authorize(Policy = "DeleteUserRole")]
-        public async Task<IActionResult> DeleteRole(int id)
+        public async Task<IActionResult> DeleteUserRole(int id)
         {
             var values = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
             var result = await _roleManager.DeleteAsync(values);
@@ -106,7 +111,7 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "AssignUserRole")]
-        public async Task<IActionResult> AssignRole(int userId)
+        public async Task<IActionResult> AssignUserRole(int userId)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
             var roles = _roleManager.Roles.ToList();
@@ -130,7 +135,7 @@ namespace PhoneBox.Controllers
 
         [HttpPost]
         [Authorize(Policy = "AssignUserRole")]
-        public async Task<IActionResult> AssignRole(List<AssignRoleVM> model)
+        public async Task<IActionResult> AssignUserRole(List<AssignRoleVM> model)
         {
             var userId = (int)TempData["UserId"];
             var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);

@@ -2,7 +2,7 @@
 
 public enum RoleTypes
 {
-    SuperAdmin,
-    Admin,
-    Basic
+    root,
+    admin,
+    employee
 }

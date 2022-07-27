@@ -18,7 +18,7 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "GetAllCustomers")]
-        public IActionResult GetAll()
+        public IActionResult GetAllCustomers()
         {
             var result = _customerRepository.GetAll();
             return View(result);
@@ -26,14 +26,14 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "AddCustomer")]
-        public IActionResult Add()
+        public IActionResult AddCustomer()
         {
             return View();
         }
 
         [HttpPost]
         [Authorize(Policy = "AddCustomer")]
-        public async Task<IActionResult> Add(AddCustomerVM model)
+        public async Task<IActionResult> AddCustomer(AddCustomerVM model)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "UpdateCustomer")]
-        public IActionResult Update(int id)
+        public IActionResult UpdateCustomer(int id)
         {
             Customer? customer = _customerRepository.Get(x => x.Id == id);
             if (customer != null)
@@ -67,7 +67,7 @@ namespace PhoneBox.Controllers
 
         [HttpPost]
         [Authorize(Policy = "UpdateCustomer")]
-        public IActionResult Update(Customer model)
+        public IActionResult UpdateCustomer(Customer model)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "DeleteCustomer")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteCustomer(int id)
         {
             await _customerRepository.DeleteAsync(id);
             return RedirectToAction("GetAll");
