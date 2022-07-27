@@ -4,7 +4,7 @@
     "inputFiles": [
       "wwwroot/plugins/fontawesome-free/css/all.min.css",
       "wwwroot/dist/css/adminlte.min.css",
-      "wwwroot/Content/PagedList.css"
+      "wwwrootx/Content/PagedList.css"
     ],
     "minify": {
       "enabled": true,
