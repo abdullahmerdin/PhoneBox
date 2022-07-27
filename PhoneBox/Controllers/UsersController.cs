@@ -74,7 +74,7 @@ namespace PhoneBox.Controllers
         {
             AppUser user = await _userManager.FindByIdAsync(userId.ToString());
             await _userManager.DeleteAsync(user);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllUsers");
         }
     }
 }

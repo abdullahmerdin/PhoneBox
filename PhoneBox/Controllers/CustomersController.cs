@@ -48,7 +48,7 @@ namespace PhoneBox.Controllers
                     LastName = model.LastName,
                     PhoneNumber = model.PhoneNumber,
                 });
-                return RedirectToAction("GetAll");
+                return RedirectToAction("GetAllCustomers");
 
             }
             throw new Exception("Ekleme işlemi esnasında bir hata meydana geldi");
@@ -72,7 +72,7 @@ namespace PhoneBox.Controllers
             if (ModelState.IsValid)
             {
                 _customerRepository.Update(model);
-                return RedirectToAction("GetAll");
+                return RedirectToAction("GetAllCustomers");
             }
             throw new Exception("Güncelleme işlemi esnasında bir hata meydana geldi");
         }
@@ -82,7 +82,7 @@ namespace PhoneBox.Controllers
         public async Task<IActionResult> DeleteCustomer(int id)
         {
             await _customerRepository.DeleteAsync(id);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllCustomers");
         }
     }
 }

@@ -104,7 +104,7 @@ namespace PhoneBox.Controllers
             var result = await _roleManager.DeleteAsync(values);
             if (result.Succeeded)
             {
-                return RedirectToAction("GetAll");
+                return RedirectToAction("GetAllUsers");
             }
             return View();
         }
