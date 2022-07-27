@@ -1,0 +1,22 @@
+[
+  {
+    "outputFileName": "wwwroot/output/site.css",
+    "inputFiles": [
+      "wwwroot/plugins/fontawesome-free/css/all.min.css",
+      "wwwroot/dist/css/adminlte.min.css",
+      "wwwroot/Content/PagedList.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "commentMode": "all"
+    }
+  },
+  {
+    "outputFileName": "wwwroot/output/all.js",
+    "inputFiles": [
+      "wwwroot/plugins/jquery/jquery.min.js",
+      "wwwroot/plugins/bootstrap/js/bootstrap.bundle.min.js",
+      "wwwroot/dist/js/adminlte.min.js"
+    ]
+  }
+]
