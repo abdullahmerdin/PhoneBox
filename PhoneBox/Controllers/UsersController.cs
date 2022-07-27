@@ -63,8 +63,8 @@ namespace PhoneBox.Controllers
                     {
                         await _userManager.AddToRoleAsync(appUser, role.Name);
                     }
-                    return RedirectToAction("Index", "Home");
-                }
+                    return RedirectToAction("GetAllUsers", "Users");
+                }   
             }
             return View(model);
         }
