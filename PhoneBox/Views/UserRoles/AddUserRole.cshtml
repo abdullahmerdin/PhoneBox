@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @model AddRoleVM
 @inject IViewLocalizer localizer
-<form method="post" asp-action="AddRole" asp-controller="UserRoles">
+<form method="post" asp-action="AddUserRole" asp-controller="UserRoles">
     <div>
         @*
             grup tarzında form alacak model.Policies.IsSelected parametresi seçilen sayfalar için true olarak değiştirilecek. 
@@ -18,10 +18,21 @@
                 <label asp-for="Name">@localizer["Rol Adı"]</label>
                 <input type="text" asp-for="Name" class="form-control">
             </div>
+            
+        </div>
+        <div class="card-widget">
+            <div class="form-group">
+                <select type="checkbox" asp-for="Policies" class="form-control">
+                    @foreach (var policy in Model.Policies)
+                    {
+                        <option value="@policy.Policy"></option>
+                    }
+                </select>
+            </div>
         </div>
         <div class="card-footer">
 
-            <a asp-action="GetAll" asp-controller="UserRoles" class="btn btn-secondary col-2">@localizer["Geri Dön"]</a>
+            <a asp-action="GetAllUserRoles" asp-controller="UserRoles" class="btn btn-secondary col-2">@localizer["Geri Dön"]</a>
             <input type="submit" value="@localizer["Rol Ekle"]" class="btn btn-success col-2 float-right">
         </div>
     </div>

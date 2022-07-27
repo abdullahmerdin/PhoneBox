@@ -2,7 +2,7 @@
 @inject IViewLocalizer localizer
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/PhoneNumbers/GetAll/" class="brand-link">
+    <a asp-action="GetAllCustomers" asp-controller="Customers" class="brand-link">
         <span class="brand-text font-weight-light">Phone<span class="text-bold">Box</span></span>
     </a>
 
@@ -12,10 +12,8 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a asp-action="GetAll" asp-controller="Customers" class="nav-link">
+                    <a asp-action="GetAllCustomers" asp-controller="Customers" class="nav-link">
                         <i class="nav-icon fas fa-phone"></i>
                         <p>
                             @localizer["Müşteriler"]
@@ -23,13 +21,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a asp-action="GetAll" asp-controller="UserRoles" class="nav-link">
-                        <i class="nav-icon fas fa-shield"></i>
+                    <a asp-action="GetAllUsers" asp-controller="Users" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            @localizer["Kullanıcılar"]
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="GetAllUserRoles" asp-controller="UserRoles" class="nav-link">
+                        <i class="nav-icon fas fa-crown"></i>
                         <p>
                             @localizer["Roller"]
                         </p>
                     </a>
                 </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

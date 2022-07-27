@@ -19,9 +19,9 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "GetAllCustomers")]
-        public IActionResult GetAllCustomers(int page = 1)
+        public IActionResult GetAllCustomers(int page = 1, int pageSize=5)
         {
-            var result = _customerRepository.GetAll().ToPagedList(page, 2);
+            var result = _customerRepository.GetAll().ToPagedList(page, pageSize);
             return View(result);
         }
        
