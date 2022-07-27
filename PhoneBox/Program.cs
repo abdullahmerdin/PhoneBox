@@ -88,6 +88,6 @@ app.UseRequestLocalization(((IApplicationBuilder)app).ApplicationServices.GetReq
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Customers}/{action=GetAll}/{id?}");
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
 
 app.Run();

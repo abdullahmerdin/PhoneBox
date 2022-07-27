@@ -4,6 +4,7 @@ using PhoneBox.Entities;
 using PhoneBox.Models;
 using PhoneBox.Repositories.Abstracts;
 using System.Security.Claims;
+using X.PagedList;
 
 namespace PhoneBox.Controllers
 {
@@ -18,11 +19,12 @@ namespace PhoneBox.Controllers
 
         [HttpGet]
         [Authorize(Policy = "GetAllCustomers")]
-        public IActionResult GetAllCustomers()
+        public IActionResult GetAllCustomers(int page = 1)
         {
-            var result = _customerRepository.GetAll();
+            var result = _customerRepository.GetAll().ToPagedList(page, 2);
             return View(result);
         }
+       
 
         [HttpGet]
         [Authorize(Policy = "AddCustomer")]

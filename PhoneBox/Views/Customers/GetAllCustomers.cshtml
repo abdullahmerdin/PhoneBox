@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@*@model IQueryable<PhoneBox.Entities.PhoneNumber>*@
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<PhoneBox.Entities.Customer>
 @inject IViewLocalizer localizer
 <!-- Main content -->
 <section class="content">
@@ -10,7 +12,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title mt-2">@localizer["Numaralar"] </h3>
-                        <a asp-action="Add" asp-controller="PhoneNumbers" class="btn btn-block btn-primary col-2 float-right">@localizer["Numara Ekle"]</a>
+                        <a asp-action="AddCustomer" asp-controller="Customers" class="btn btn-block btn-primary col-2 float-right">@localizer["Numara Ekle"]</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -26,18 +28,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach (var number in Model)
+                            @foreach (var customer in Model)
                             {
                                 <tr>
-                                    <td>@number.Id</td>
-                                    <td>@number.AppUser.FirstName @number.AppUser.LastName</td>
-                                    <td>@number.Number</td>
-                                    <td>@number.CreatedTime</td>
+                                    <td>@customer.Id</td>
+                                    <td>@customer.FirstName @customer.LastName</td>
+                                    <td>@customer.PhoneNumber</td>
+                                    <td>@customer.CreatedTime</td>
                                     <td>
-                                        <a asp-action="Update" asp-route-id="@number.Id" class="btn btn-info">@localizer["Güncelle"]</a>
+                                        <a asp-action="UpdateCustomer" asp-route-id="@customer.Id" class="btn btn-info">@localizer["Güncelle"]</a>
                                     </td>
                                     <td>
-                                        <a asp-action="Delete" asp-route-id="@number.Id" class="btn btn-danger col-10">@localizer["Sil"]</a>
+                                        <a asp-action="DeleteCustomer" asp-route-id="@customer.Id" class="btn btn-danger col-10">@localizer["Sil"]</a>
                                     </td>
                                 </tr>
                             }
@@ -48,11 +50,13 @@
                                 <th>@localizer["Kullanıcı"]</th>
                                 <th>@localizer["Numara"]</th>
                                 <th>@localizer["Oluşturulma Tarihi"]</th>
-                                 <th>@localizer["Güncelle"]</th>
+                                <th>@localizer["Güncelle"]</th>
                                 <th>@localizer["Sil"]</th>
                             </tr>
                             </tfoot>
+                          
                         </table>
+                        @Html.PagedListPager((IPagedList)Model, page=>Url.Action("GetAllCustomers", new { page }))
                     </div>
                     <!-- /.card-body -->
                 </div>

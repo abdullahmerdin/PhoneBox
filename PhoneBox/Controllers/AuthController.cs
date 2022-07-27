@@ -5,6 +5,7 @@ using PhoneBox.Constants.Enums;
 using PhoneBox.Entities.Identity;
 using PhoneBox.Models;
 using System.Security.Claims;
+using PhoneBox.Constants.Identity.Constants;
 
 namespace PhoneBox.Controllers
 {
@@ -41,7 +42,7 @@ namespace PhoneBox.Controllers
             //await _roleManager.AddClaimAsync(root, new Claim(CustomClaimTypes.Permission, "AssignUserRole"));
 
 
-            //int adminId = 7;
+            //int adminId = _roleManager.GetRoleIdAsync(new AppRole() { Name = "Admin" }).Id;
             //AppRole admin = _roleManager.Roles.Single(x => x.Id == adminId);
             //await _roleManager.AddClaimAsync(admin, new Claim(CustomClaimTypes.Permission, "AddUser"));
             //await _roleManager.AddClaimAsync(admin, new Claim(CustomClaimTypes.Permission, "UpdateUser"));
@@ -56,7 +57,7 @@ namespace PhoneBox.Controllers
             //await _roleManager.AddClaimAsync(admin, new Claim(CustomClaimTypes.Permission, "DeleteCustomer"));
             //await _roleManager.AddClaimAsync(admin, new Claim(CustomClaimTypes.Permission, "UpdateCustomer"));
 
-            //int employeeId = 8;
+            //int employeeId = _roleManager.GetRoleIdAsync(new AppRole() { Name = "Employee" }).Id;
             //AppRole employee = _roleManager.Roles.Single(x => x.Id == employeeId);
             //await _roleManager.AddClaimAsync(employee, new Claim(CustomClaimTypes.Permission, "GetAllCustomers"));
             //await _roleManager.AddClaimAsync(employee, new Claim(CustomClaimTypes.Permission, "AddCustomer"));
