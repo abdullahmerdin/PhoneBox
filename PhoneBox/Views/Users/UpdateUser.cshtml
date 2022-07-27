@@ -2,7 +2,7 @@
 @model PhoneBox.Models.UpdateRoleVM
 @inject IViewLocalizer localizer
 @*TODO: Bu sayfa Update user eklendikten sonra düzenlenecek *@
-<form method="post" asp-action="UpdateUser" asp-controller="User">
+<form method="post" asp-action="UpdateUser" asp-controller="Users">
     @Html.HiddenFor(x => x.Id)
     <div class="card card-primary m-3"/>
     <div class="card card-primary">
